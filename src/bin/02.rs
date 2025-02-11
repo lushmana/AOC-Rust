@@ -81,7 +81,7 @@ pub fn part_one(input: &str) -> Option<u64> {
 }
 
 pub fn part_two(_input: &str) -> Option<u64> {
-    None
+    Some(0)
 }
 
 #[cfg(test)]
