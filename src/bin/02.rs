@@ -72,16 +72,28 @@ pub fn part_one(input: &str) -> Option<u64> {
             rst += 1;
         }
     }
-    /* for line in input.lines() {
-        let report = text::int::<_, Simple<u8>>(10)
-            .then_ignore(end());
-        println!("{:?}", report);
-    } */
     Some(rst)
 }
 
-pub fn part_two(_input: &str) -> Option<u64> {
-    Some(0)
+pub fn part_two(input: &str) -> Option<u64> {
+    let mut rst = 0;
+    for line in input.lines() {
+        let report = line.split_whitespace().map(|n|n.parse::<i32>().unwrap()).collect::<Report>();
+        
+        if check_safe(&report) {
+            rst += 1;
+        } else {
+            for index in 0..report.len() {
+                let mut new_report = report.clone();
+                new_report.remove(index);
+                if check_safe(&new_report) {
+                    rst += 1;
+                    break;
+                }
+            }
+        }
+    }
+    Some(rst)
 }
 
 #[cfg(test)]
@@ -97,6 +109,6 @@ mod tests {
     #[test]
     fn test_part_two() {
         let result = part_two(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, Some(0));
+        assert_eq!(result, Some(4));
     }
 }
