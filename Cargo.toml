@@ -22,6 +22,7 @@ test_lib = []
 [dependencies]
 
 # Template dependencies
+glam = "0.29.0"
 chrono = { version = "0.4.38", optional = true }
 chumsky = "0.9.3"
 itertools = "0.13.0"
